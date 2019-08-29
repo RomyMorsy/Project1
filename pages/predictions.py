@@ -128,8 +128,8 @@ layout = dbc.Row([column1, column2])
 
 
 @app.callback(
-    Output('prediction-content', 'children'),
-    [Input('clump_thickness', 'value'), Input('uniformity_of_cell_size', 'value'),
+    Output('prediction-content','children'),
+    [Input('clump_thickness','value'), Input('uniformity_of_cell_size','value'),
      Input('uniformity_of_cell_shape','value'),Input('marginal_adhesion','value'),
      Input('single_epithelial_cell_size','value'),Input('bare_nuclei','value'),
      Input('bland_chromatin','value'),Input('normal_nucleoli','value'),
@@ -139,7 +139,7 @@ def predict(clump_thickness,uniformity_of_cell_size,uniformity_of_cell_shape,
             marginal_adhesion,single_epithelial_cell_size,bare_nuclei,
             bland_chromatin,normal_nucleoli,mitosis):
     df = pd.DataFrame(
-        columns=['clump_thickness', 'uniformity_of_cell_size',
+        columns=['clump_thickness','uniformity_of_cell_size',
                  'uniformity_of_cell_shape','marginal_adhesion',
                  'single_epithelial_cell_size','bare_nuclei',
                  'bland_chromatin','normal_nucleoli','mitosis'],
@@ -148,7 +148,11 @@ def predict(clump_thickness,uniformity_of_cell_size,uniformity_of_cell_shape,
         bland_chromatin,normal_nucleoli,mitosis]]
     )
     y_pred = pipeline.predict(df)[0]
-    return f'{y_pred:.0f} class'
+    if y_pred = 2:
+        return f'Benign'
+    else:
+        return f'Malignant'
+
 
 
 '''Variable Names:

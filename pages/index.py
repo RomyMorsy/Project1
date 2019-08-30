@@ -4,8 +4,10 @@ import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
 import plotly.express as px
-
+from PIL import Image
 from app import app
+import seaborn as sns
+import pandas as pd
 
 """
 https://dash-bootstrap-components.opensource.faculty.ai/l/components/layout
@@ -28,14 +30,12 @@ column1 = dbc.Col(
     [
         dcc.Markdown(
             """
+           This app is useful for researchers or for doctors to estimate whether
+           or not their patient has a malignant or benign tumor based on different
+           parameters. They are normalized on a 1-10 scale and are all to do
+           with the size, shape, and qualities of the skin and cells surrounding
+           the tumor.
 
-            ## Value Proposition
-
-            Emphasize how the app will benefit users. Don't emphasize the underlying technology.
-
-            ✅ RUN is a running app that adapts to your fitness levels and designs personalized workouts to help you improve your running.
-
-            ❌ RUN is the only intelligent running app that uses sophisticated deep neural net machine learning to make your run smarter because we believe in ML driven workouts.
 
             """
         ),
@@ -43,10 +43,8 @@ column1 = dbc.Col(
     ],
     md=4,
 )
-
-gapminder = px.data.gapminder()
-fig = px.scatter(gapminder.query("year==2007"), x="gdpPercap", y="lifeExp", size="pop", color="continent",
-           hover_name="country", log_x=True, size_max=60)
+df = pd.read_csv('breast_cancer_dataset.csv')
+fig = px.scatter(df,x='clump_thickness',y='single_epithelial_cell_size',color='class');
 
 column2 = dbc.Col(
     [
@@ -55,3 +53,8 @@ column2 = dbc.Col(
 )
 
 layout = dbc.Row([column1, column2])
+
+
+
+
+'''bcancer-pred'''

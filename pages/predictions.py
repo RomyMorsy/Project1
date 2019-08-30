@@ -12,7 +12,7 @@ pipeline = load('pipeline.joblib')
 
 column1 = dbc.Col(
     [
-        dcc.Markdown('#Predictions'),
+        dcc.Markdown('## Model Features'),
 
         dcc.Markdown('Clump Thickness'),
         dcc.Slider(
@@ -118,8 +118,8 @@ md=4,
 
 column2 = dbc.Col(
     [
-        html.H2('Benign/Malign Tumor', className='mb-5'),
-        html.Div(id='prediction-content', className='lead')
+        html.H3('Prediction', className='mb-5'),
+        html.Div(id='prediction-content', className='lead',style={'fontSize': 32})
     ]
 )
 
@@ -148,7 +148,7 @@ def predict(clump_thickness,uniformity_of_cell_size,uniformity_of_cell_shape,
         bland_chromatin,normal_nucleoli,mitosis]]
     )
     y_pred = pipeline.predict(df)[0]
-    if y_pred = 2:
+    if y_pred == 2:
         return f'Benign'
     else:
         return f'Malignant'
